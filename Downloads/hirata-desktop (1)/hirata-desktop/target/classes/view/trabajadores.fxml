@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hirata.controller.TrabajadorController"
+            stylesheets="@style.css">
+
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <Label text="Hirata" styleClass="sidebar-title"/>
+
+            <Button text="Dashboard" onAction="#volverDashboard" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Camiones" onAction="#irCamiones" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Kilometraje" onAction="#irKilometraje" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Mantenimientos" onAction="#irMantenimientos" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Trabajadores" styleClass="sidebar-button-active" maxWidth="Infinity"/>
+            <Button text="Alertas" onAction="#irAlertas" styleClass="sidebar-button" maxWidth="Infinity"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="sidebar-button" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" pannable="true">
+            <content>
+                <VBox spacing="20" styleClass="main-container">
+                    <padding>
+                        <Insets top="20" right="24" bottom="24" left="24"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Gestión de Trabajadores" styleClass="page-title"/>
+                        <Label text="Registra y administra a los trabajadores del sistema."
+                               styleClass="page-subtitle"/>
+                    </VBox>
+
+                    <!-- FORMULARIO -->
+                    <VBox spacing="16" styleClass="card">
+                        <Label text="Nuevo trabajador" styleClass="section-title"/>
+
+                        <GridPane hgap="14" vgap="14">
+                            <Label text="Nombre" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="label-muted"/>
+                            <TextField fx:id="txtNombre" promptText="Ej: Juan Pérez" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+                            <Label text="RUT" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="label-muted"/>
+                            <TextField fx:id="txtRut" promptText="Ej: 12.345.678-9" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                            <Button text="Guardar trabajador"
+                                    onAction="#guardarTrabajador"
+                                    styleClass="primary-button"
+                                    GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        </GridPane>
+
+                        <Label fx:id="lblMensaje"/>
+                    </VBox>
+
+                    <!-- TABLA -->
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Listado de trabajadores" styleClass="section-title"/>
+
+                        <TableView fx:id="tableTrabajadores" prefHeight="400">
+                            <columns>
+                                <TableColumn fx:id="colId" text="ID" prefWidth="90"/>
+                                <TableColumn fx:id="colNombre" text="Nombre" prefWidth="320"/>
+                                <TableColumn fx:id="colRut" text="RUT" prefWidth="220"/>
+                            </columns>
+                        </TableView>
+
+                        <HBox spacing="12">
+                            <Button text="Eliminar seleccionado" onAction="#eliminarTrabajador" styleClass="danger-button"/>
+                            <Button text="Actualizar lista" onAction="#actualizarTabla" styleClass="secondary-button"/>
+                        </HBox>
+                    </VBox>
+
+                    <HBox spacing="10">
+                        <Button text="Volver al dashboard" onAction="#volverDashboard" styleClass="secondary-button"/>
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hirata.controller.MantenimientoController"
+            stylesheets="@style.css">
+
+    <!-- 🔹 SIDEBAR -->
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <Label text="Hirata" styleClass="sidebar-title"/>
+
+            <Button text="Dashboard" onAction="#volverDashboard" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Camiones" onAction="#irCamiones" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Kilometraje" onAction="#irKilometraje" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Mantenimientos" styleClass="sidebar-button-active" maxWidth="Infinity"/>
+            <Button text="Trabajadores" onAction="#irTrabajadores" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Alertas" onAction="#irAlertas" styleClass="sidebar-button" maxWidth="Infinity"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="sidebar-button" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <!-- 🔹 CONTENIDO -->
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <VBox spacing="20" styleClass="main-container">
+
+                    <padding>
+                        <Insets top="20" right="24" bottom="24" left="24"/>
+                    </padding>
+
+                    <!-- TÍTULO -->
+                    <VBox spacing="5">
+                        <Label text="Gestión de Mantenimientos" styleClass="page-title"/>
+                        <Label text="Registra, consulta y gestiona mantenimientos"
+                               styleClass="page-subtitle"/>
+                    </VBox>
+
+                    <!-- FORMULARIO -->
+                    <VBox spacing="15" styleClass="card">
+
+                        <Label text="Nuevo mantenimiento" styleClass="section-title"/>
+
+                        <GridPane hgap="10" vgap="10">
+
+                            <Label text="ID Camión" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                            <TextField fx:id="txtCamionId"
+                                       GridPane.columnIndex="0"
+                                       GridPane.rowIndex="1"
+                                       promptText="Ej: 1"/>
+
+                            <Label text="Tipo" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                            <ComboBox fx:id="comboTipo"
+                                      GridPane.columnIndex="1"
+                                      GridPane.rowIndex="1"/>
+
+                            <Label text="Estado" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                            <ComboBox fx:id="comboEstado"
+                                      GridPane.columnIndex="2"
+                                      GridPane.rowIndex="1"/>
+
+                            <Label text="Descripción" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                            <TextField fx:id="txtDescripcion"
+                                       GridPane.columnIndex="0"
+                                       GridPane.rowIndex="3"
+                                       GridPane.columnSpan="3"
+                                       promptText="Ej: Cambio de aceite"/>
+
+                            <Button text="Guardar"
+                                    onAction="#guardarMantenimiento"
+                                    styleClass="primary-button"
+                                    GridPane.columnIndex="3"
+                                    GridPane.rowIndex="3"/>
+                        </GridPane>
+
+                        <Label fx:id="lblMensaje"/>
+                    </VBox>
+
+                    <!-- TABLA -->
+                    <VBox spacing="15" styleClass="card">
+
+                        <Label text="Listado de mantenimientos" styleClass="section-title"/>
+
+                        <TableView fx:id="tableMantenimientos" prefHeight="400">
+
+                            <columns>
+                                <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
+                                <TableColumn fx:id="colCamionId" text="Camión" prefWidth="100"/>
+                                <TableColumn fx:id="colTipo" text="Tipo" prefWidth="120"/>
+                                <TableColumn fx:id="colDescripcion" text="Descripción" prefWidth="300"/>
+                                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="180"/>
+                                <TableColumn fx:id="colEstado" text="Estado" prefWidth="150"/>
+                            </columns>
+
+                        </TableView>
+
+                        <!-- BOTONES DE ACCIÓN -->
+                        <HBox spacing="10">
+
+                            <Button text="Lista de espera"
+                                    onAction="#cambiarAListaEspera"
+                                    styleClass="warning-button"/>
+
+                            <Button text="En mantenimiento"
+                                    onAction="#cambiarAEnMantenimiento"
+                                    styleClass="primary-button"/>
+
+                            <Button text="Finalizado"
+                                    onAction="#cambiarAFinalizado"
+                                    styleClass="success-button"/>
+
+                            <Button text="Eliminar"
+                                    onAction="#eliminarMantenimiento"
+                                    styleClass="danger-button"/>
+                        </HBox>
+
+                        <!-- 🔥 EXPORTACIÓN -->
+                        <HBox spacing="10">
+
+                            <Button text="Exportar PDF"
+                                    onAction="#exportarPDF"
+                                    styleClass="danger-button"/>
+
+                            <Button text="Exportar Excel"
+                                    onAction="#exportarExcel"
+                                    styleClass="success-button"/>
+                        </HBox>
+
+                    </VBox>
+
+                    <!-- VOLVER -->
+                    <HBox>
+                        <Button text="Volver al dashboard"
+                                onAction="#volverDashboard"
+                                styleClass="secondary-button"/>
+                    </HBox>
+
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

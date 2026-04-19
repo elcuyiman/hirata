@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hirata.controller.AlertaController"
+            stylesheets="@style.css">
+
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <Label text="Hirata" styleClass="sidebar-title"/>
+
+            <Button text="Dashboard" onAction="#volverDashboard" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Camiones" onAction="#irCamiones" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Kilometraje" onAction="#irKilometraje" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Mantenimientos" onAction="#irMantenimientos" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Trabajadores" onAction="#irTrabajadores" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Alertas" styleClass="sidebar-button-active" maxWidth="Infinity"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="sidebar-button" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" pannable="true">
+            <content>
+                <VBox spacing="20" styleClass="main-container">
+                    <padding>
+                        <Insets top="20" right="24" bottom="24" left="24"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Panel de Alertas" styleClass="page-title"/>
+                        <Label text="Visualiza, filtra y marca como atendidas las alertas del sistema."
+                               styleClass="page-subtitle"/>
+                    </VBox>
+
+                    <!-- RESUMEN -->
+                    <HBox spacing="16">
+                        <VBox spacing="8" styleClass="card card-alert">
+                            <Label text="Alertas pendientes" styleClass="card-title"/>
+                            <Label fx:id="lblPendientes" text="0" styleClass="card-number"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="card card-warning">
+                            <Label text="Alertas AVISO" styleClass="card-title"/>
+                            <Label fx:id="lblAvisos" text="0" styleClass="card-number"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="card card-info">
+                            <Label text="Alertas EMERGENCIA" styleClass="card-title"/>
+                            <Label fx:id="lblEmergencias" text="0" styleClass="card-number"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- ACCIONES -->
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Gestión de alertas" styleClass="section-title"/>
+
+                        <HBox spacing="12">
+                            <ComboBox fx:id="comboFiltroEstado" prefWidth="180"/>
+                            <Button text="Filtrar" onAction="#filtrarPorEstado" styleClass="primary-button"/>
+                            <Button text="Mostrar todas" onAction="#mostrarTodas" styleClass="secondary-button"/>
+                            <Button text="Marcar como atendida" onAction="#marcarAtendida" styleClass="success-button"/>
+                        </HBox>
+
+                        <Label fx:id="lblMensaje"/>
+                    </VBox>
+
+                    <!-- TABLA -->
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Listado de alertas" styleClass="section-title"/>
+
+                        <TableView fx:id="tableAlertas" prefHeight="420">
+                            <columns>
+                                <TableColumn fx:id="colId" text="ID" prefWidth="70"/>
+                                <TableColumn fx:id="colCamionId" text="Camión" prefWidth="90"/>
+                                <TableColumn fx:id="colTipo" text="Tipo" prefWidth="140"/>
+                                <TableColumn fx:id="colMensaje" text="Mensaje" prefWidth="320"/>
+                                <TableColumn fx:id="colKilometraje" text="KM" prefWidth="100"/>
+                                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="180"/>
+                                <TableColumn fx:id="colEstado" text="Estado" prefWidth="140"/>
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <HBox spacing="10">
+                        <Button text="Volver al dashboard" onAction="#volverDashboard" styleClass="secondary-button"/>
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

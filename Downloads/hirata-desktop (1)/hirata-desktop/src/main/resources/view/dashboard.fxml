@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hirata.controller.DashboardController"
+            stylesheets="@style.css">
+
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <ImageView fitHeight="34" preserveRatio="true">
+                    <image>
+                        <Image url="@logo.png"/>
+                    </image>
+                </ImageView>
+                <Label text="Hirata" styleClass="sidebar-title"/>
+            </HBox>
+
+            <Button text="Dashboard" onAction="#irDashboard" styleClass="sidebar-button-active" maxWidth="Infinity"/>
+            <Button text="Camiones" onAction="#abrirCamiones" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Kilometraje" onAction="#abrirKilometraje" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Mantenimientos" onAction="#abrirMantenimientos" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Trabajadores" onAction="#irTrabajadores" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Alertas" onAction="#irAlertas" styleClass="sidebar-button" maxWidth="Infinity"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="sidebar-button" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" pannable="true">
+            <content>
+                <VBox spacing="20" styleClass="main-container">
+                    <padding>
+                        <Insets top="20" right="24" bottom="24" left="24"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Bienvenido al Panel de Control" styleClass="page-title"/>
+                        <Label text="Aquí puedes ver un resumen rápido del estado del sistema."
+                               styleClass="page-subtitle"/>
+                    </VBox>
+
+                    <!-- TARJETAS SUPERIORES -->
+                    <GridPane hgap="16" vgap="16">
+                        <VBox spacing="8" styleClass="card card-alert" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                            <Label text="Alertas pendientes" styleClass="card-title"/>
+                            <Label fx:id="lblAlertas" text="0" styleClass="card-number"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="card card-warning" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                            <Label text="Lista de espera" styleClass="card-title"/>
+                            <Label fx:id="lblListaEspera" text="0" styleClass="card-number"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="card card-info" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                            <Label text="En mantenimiento" styleClass="card-title"/>
+                            <Label fx:id="lblEnMantenimiento" text="0" styleClass="card-number"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="card card-success" GridPane.columnIndex="3" GridPane.rowIndex="0">
+                            <Label text="Finalizados" styleClass="card-title"/>
+                            <Label fx:id="lblFinalizados" text="0" styleClass="card-number"/>
+                        </VBox>
+                    </GridPane>
+
+                    <!-- RESUMEN GENERAL QUE SÍ FUNCIONA -->
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Resumen general" styleClass="section-title"/>
+                        <Label text="Camiones, mantenimientos y actividad en un solo lugar."
+                               styleClass="page-subtitle"/>
+
+                        <GridPane hgap="16" vgap="16">
+                            <VBox spacing="6" styleClass="info-box" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label text="Total camiones" styleClass="card-title"/>
+                                <Label fx:id="lblResumenCamiones" text="0" styleClass="card-number"/>
+                            </VBox>
+
+                            <VBox spacing="6" styleClass="info-box" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label text="Total mantenimientos" styleClass="card-title"/>
+                                <Label fx:id="lblResumenMantenimientos" text="0" styleClass="card-number"/>
+                            </VBox>
+
+                            <VBox spacing="6" styleClass="info-box" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                <Label text="Trabajadores registrados" styleClass="card-title"/>
+                                <Label fx:id="lblResumenTrabajadores" text="0" styleClass="card-number"/>
+                            </VBox>
+                        </GridPane>
+
+                        <HBox spacing="10">
+                            <Button text="Actualizar datos" onAction="#actualizarDashboard" styleClass="primary-button"/>
+                        </HBox>
+                    </VBox>
+
+                    <!-- ACCIONES RÁPIDAS -->
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Acciones rápidas" styleClass="section-title"/>
+
+                        <GridPane hgap="16" vgap="16">
+                            <VBox spacing="8" styleClass="info-box" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                                <Label text="Gestión de Camiones" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                <Label text="Registrar, consultar y administrar la flota." styleClass="label-muted"/>
+                                <Button text="Abrir módulo" onAction="#abrirCamiones" styleClass="primary-button"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="info-box" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                <Label text="Registrar Kilometraje" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                <Label text="Agregar kilometraje y generar alertas." styleClass="label-muted"/>
+                                <Button text="Registrar" onAction="#abrirKilometraje" styleClass="primary-button"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="info-box" GridPane.columnIndex="2" GridPane.rowIndex="0">
+                                <Label text="Mantenimientos" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                <Label text="Gestionar lista de espera, proceso y finalización." styleClass="label-muted"/>
+                                <Button text="Gestionar" onAction="#abrirMantenimientos" styleClass="warning-button"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="info-box" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                                <Label text="Trabajadores" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                <Label text="Registrar trabajadores con nombre y RUT." styleClass="label-muted"/>
+                                <Button text="Abrir módulo" onAction="#irTrabajadores" styleClass="success-button"/>
+                            </VBox>
+
+                            <VBox spacing="8" styleClass="info-box" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                <Label text="Alertas" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                                <Label text="Visualizar y marcar alertas como atendidas." styleClass="label-muted"/>
+                                <Button text="Ver alertas" onAction="#irAlertas" styleClass="danger-button"/>
+                            </VBox>
+                        </GridPane>
+                    </VBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>

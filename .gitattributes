@@ -1,0 +1,3 @@
+*.exe filter=lfs diff=lfs merge=lfs -text
+**/lib/modules filter=lfs diff=lfs merge=lfs -text
+**/bin/jfxwebkit.dll filter=lfs diff=lfs merge=lfs -text

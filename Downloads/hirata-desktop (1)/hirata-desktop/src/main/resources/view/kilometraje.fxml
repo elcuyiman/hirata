@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.hirata.controller.KilometrajeController"
+            stylesheets="@style.css">
+
+    <left>
+        <VBox spacing="10" styleClass="sidebar">
+            <Label text="Hirata" styleClass="sidebar-title"/>
+
+            <Button text="Dashboard" onAction="#volverDashboard" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Camiones" onAction="#irCamiones" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Kilometraje" styleClass="sidebar-button-active" maxWidth="Infinity"/>
+            <Button text="Mantenimientos" onAction="#irMantenimientos" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Trabajadores" onAction="#irTrabajadores" styleClass="sidebar-button" maxWidth="Infinity"/>
+            <Button text="Alertas" onAction="#irAlertas" styleClass="sidebar-button" maxWidth="Infinity"/>
+
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="Cerrar sesión" onAction="#cerrarSesion" styleClass="sidebar-button" maxWidth="Infinity"/>
+        </VBox>
+    </left>
+
+    <center>
+        <ScrollPane fitToWidth="true" pannable="true">
+            <content>
+                <VBox spacing="20" styleClass="main-container">
+                    <padding>
+                        <Insets top="20" right="24" bottom="24" left="24"/>
+                    </padding>
+
+                    <VBox spacing="4">
+                        <Label text="Registro de Kilometraje" styleClass="page-title"/>
+                        <Label text="Ingresa kilometraje por camión y genera alertas automáticas."
+                               styleClass="page-subtitle"/>
+                    </VBox>
+
+                    <!-- RESUMEN -->
+                    <HBox spacing="16">
+                        <VBox spacing="8" styleClass="card card-warning">
+                            <Label text="Alerta AVISO" styleClass="card-title"/>
+                            <Label text="≥ 5.000 km" styleClass="card-number"/>
+                        </VBox>
+
+                        <VBox spacing="8" styleClass="card card-alert">
+                            <Label text="Alerta EMERGENCIA" styleClass="card-title"/>
+                            <Label text="≥ 10.000 km" styleClass="card-number"/>
+                        </VBox>
+                    </HBox>
+
+                    <!-- FORMULARIO -->
+                    <VBox spacing="16" styleClass="card">
+                        <Label text="Nuevo registro" styleClass="section-title"/>
+
+                        <GridPane hgap="14" vgap="14">
+                            <Label text="ID Camión" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="label-muted"/>
+                            <TextField fx:id="txtCamionId" promptText="Ej: 1" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+
+                            <Label text="Kilometraje" GridPane.columnIndex="1" GridPane.rowIndex="0" styleClass="label-muted"/>
+                            <TextField fx:id="txtKilometraje" promptText="Ej: 5000" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                            <Button text="Registrar kilometraje"
+                                    onAction="#registrarKilometraje"
+                                    styleClass="primary-button"
+                                    GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                        </GridPane>
+
+                        <Label fx:id="lblMensaje"/>
+                    </VBox>
+
+                    <!-- TABLA -->
+                    <VBox spacing="14" styleClass="card">
+                        <Label text="Historial de kilometraje" styleClass="section-title"/>
+
+                        <TableView fx:id="tableKilometrajes" prefHeight="420">
+                            <columns>
+                                <TableColumn fx:id="colId" text="ID" prefWidth="80"/>
+                                <TableColumn fx:id="colCamionId" text="Camión" prefWidth="100"/>
+                                <TableColumn fx:id="colKilometraje" text="Kilometraje" prefWidth="180"/>
+                                <TableColumn fx:id="colFecha" text="Fecha" prefWidth="220"/>
+                            </columns>
+                        </TableView>
+
+                        <HBox spacing="12">
+                            <Button text="Actualizar lista" onAction="#actualizarTabla" styleClass="secondary-button"/>
+                        </HBox>
+                    </VBox>
+
+                    <HBox spacing="10">
+                        <Button text="Volver al dashboard" onAction="#volverDashboard" styleClass="secondary-button"/>
+                    </HBox>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </center>
+
+</BorderPane>
