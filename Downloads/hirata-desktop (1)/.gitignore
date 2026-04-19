@@ -1,0 +1,7 @@
+﻿target/
+bin/
+*.class
+.settings/
+.idea/
+.vscode/
+*.log
